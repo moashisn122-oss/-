@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода | Прогноз на день, неделю, месяц</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="weather-animation" id="weather-animation"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cloud-sun-rain"></i> Погодное приложение</h1>
+            <button class="settings-btn" id="settings-btn"><i class="fas fa-cog"></i></button>
+        </div>
+
+        <div class="clock" id="clock">⏳ Загрузка времени...</div>
+
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Введите город..." autocomplete="off">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+            <button id="geo-btn"><i class="fas fa-location-arrow"></i></button>
+            <div class="suggestions" id="suggestions"></div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="today">Сегодня</button>
+            <button class="tab-btn" data-tab="week">Неделя</button>
+            <button class="tab-btn" data-tab="month">Месяц</button>
+        </div>
+
+        <div class="current-weather" id="current-weather">
+            <div class="loading" id="loading"></div>
+        </div>
+
+        <div class="forecast-container">
+            <div class="tab-content active" id="today-forecast">
+                <div class="forecast-title"><i class="fas fa-calendar-day"></i> Прогноз на сегодня</div>
+                <div class="hourly-forecast" id="hourly-forecast"></div>
+            </div>
+            <div class="tab-content" id="week-forecast">
+                <div class="forecast-title"><i class="fas fa-calendar-week"></i> Прогноз на неделю</div>
+                <div class="daily-forecast" id="daily-forecast"></div>
+            </div>
+            <div class="tab-content" id="month-forecast">
+                <div class="forecast-title"><i class="fas fa-calendar-alt"></i> Прогноз на месяц</div>
+                <div class="monthly-forecast" id="monthly-forecast"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Настройки</div>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="settings-section">
+                <div class="settings-section-title">Тема</div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Светлая</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Темная</span>
+                </div>
+                <div class="theme-options">
+                    <button class="theme-btn" data-theme="default">Стандартная</button>
+                    <button class="theme-btn" data-theme="sunset">Закат</button>
+                    <button class="theme-btn" data-theme="ocean">Океан</button>
+                </div>
+            </div>
+            <div class="settings-section">
+                <div class="settings-section-title">Интенсивность анимаций</div>
+                <div class="slider-container">
+                    <span class="slider-label">Облака</span>
+                    <input type="range" class="intensity-slider" id="cloud-intensity" min="0" max="10" value="5">
+                    <span class="slider-value" id="cloud-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <span class="slider-label">Дождь</span>
+                    <input type="range" class="intensity-slider" id="rain-intensity" min="0" max="10" value="5">
+                    <span class="slider-value" id="rain-value">5</span>
+                </div>
+                <div class="slider-container">
+                    <span class="slider-label">Снег</span>
+                    <input type="range" class="intensity-slider" id="snow-intensity" min="0" max="10" value="5">
+                    <span class="slider-value" id="snow-value">5</span>
+                </div>
+            </div>
+            <div class="settings-section">
+                <div class="settings-section-title">Звуки погоды</div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Включить</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Звуки погоды -->
+    <audio id="rain-sound" src="assets/sounds/rain.mp3" loop></audio>
+    <audio id="thunder-sound" src="assets/sounds/thunder.mp3" loop></audio>
+    <audio id="wind-sound" src="assets/sounds/wind.mp3" loop></audio>
+    <audio id="snow-sound" src="assets/sounds/snow.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
